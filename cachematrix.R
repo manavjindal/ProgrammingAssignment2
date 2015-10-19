@@ -1,7 +1,13 @@
-## Put comments here that give an overall description of what your
-## functions do
+## return: a list containing functions to
 
-## Write a short comment describing this function
+## This function return a list containing functions to
+##              1. set the matrix
+##              2. get the matrix
+##              3. set the inverse
+##              4. get the inverse
+##         this list is used as the input to cacheSolve()
+
+## x: a square invertible matrix
 
 makeCacheMatrix <- function(x = matrix()) {
         
@@ -33,16 +39,24 @@ cacheSolve <- function(x, ...) {
         
         v_inv <- x$getinv()
         
+        # if the inverse has already been calculated
         if(!is.null(v_inv)) {
+                
+                # get it from the cache and skips the computation.
+                
                 message("Getting cached data, please wait")
                 return(v_inv)
         }
+        
+        # else calculates the inverse
         
         data <- x$get()
         
         v_inv <- solve(data, ...)
         
+        # sets the value of the inverse in the cache via the setinv function
         x$setinv(v_inv)
         
+        #return the inversed matrix
         return(v_inv)
 }
